@@ -8,11 +8,13 @@ const db = new Pool({
 })
 
 const getUsuario = (request, response) => {
+    console.log('ok')
     db.query('SELECT * FROM usuario ORDER BY id_usuario ASC',
     (error, results) => {
         if(error){
             throw error
         }
+        console.log(results.rows)
         response.status(200).json(results.rows)
     })
 }
