@@ -8,13 +8,11 @@ const db = new Pool({
 })
 
 const getUsuario = (request, response) => {
-    console.log('ok')
     db.query('SELECT * FROM usuario ORDER BY id_usuario ASC',
     (error, results) => {
         if(error){
             throw error
         }
-        console.log(results.rows)
         response.status(200).json(results.rows)
     })
 }
@@ -141,10 +139,10 @@ const createUsuario = (request, response) => {
 
 const createEquipe = (request, response) => {
     try{
-        const {nome, tag, vitoria, derrota, posicao} = request.body
+        const {NOME, TAG, VITORIA, DERROTA, POSICAO} = request.body
 
         db.query('INSERT INTO equipe(nome, tag, vitoria, derrota, posicao) VALUES($1, $2, $3, $4, $5)',
-        [nome, tag, vitoria, derrota, posicao], (error, results) => {
+        [NOME, TAG, VITORIA, DERROTA, POSICAO], (error, results) => {
             if (error) {
                 throw error
             }
@@ -161,10 +159,10 @@ const createEquipe = (request, response) => {
 
 const createPartida = (request, response) => {
     try{
-        const {data_jogo, hora_jogo, id_equipe_1, id_equipe_2} = request.body
-
-        db.query('INSERT INTO partida(data_jogo, hora_jogo, id_equipe_1, id_equipe_2) VALUES($1, $2, $3, $4, $5)',
-        [data_jogo, hora_jogo, id_equipe_1, id_equipe_2], (error, results) => {
+        const {DATA_JOGO, HORA_JOGO, ID_EQUIPE_1, ID_EQUIPE_2} = request.body
+        console.log(request.body)
+        db.query('INSERT INTO partida(data_jogo, hora_jogo, id_equipe_1, id_equipe_2) VALUES($1, $2, $3, $4)',
+        [DATA_JOGO, HORA_JOGO, ID_EQUIPE_1, ID_EQUIPE_2], (error, results) => {
             if (error) {
                 throw error
             }
